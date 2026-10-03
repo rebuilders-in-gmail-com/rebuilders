@@ -17,68 +17,73 @@ function closeMenu() {
 }
 
 // ══ SCROLL REVEAL ══
+// ══ PERFORMANCE-OPTIMIZED SCROLL REVEAL ══
 const revealObs = new IntersectionObserver((entries) => {
-  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
-}, { threshold: 0.1 });
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.classList.add('visible');
+      revealObs.unobserve(e.target); // Stop observing once visible to free up CPU
+    }
+  });
+}, { threshold: 0.08, rootMargin: '50px 0px' });
+
 document.querySelectorAll('.reveal').forEach(el => revealObs.observe(el));
 
-// ══ NAV SCROLL ANIMATION ══
-// All sections in page order — matches nav link order exactly
+// ══ NAV SCROLL ANIMATION (THROTTLED WITH RAF & CACHED OFFSETS) ══
 const NAV_SECTIONS = ['hero','about','process','initiatives','events','gallery','prayer','join'];
-const navLinks = Array.from(document.querySelectorAll('.nav-links a'));
+const sectionLinks = Array.from(document.querySelectorAll('.nav-links a')).filter(a => {
+  return !a.classList.contains('nav-cta') && !a.getAttribute('href');
+});
+
+let sectionOffsets = [];
+let isNavTicking = false;
+let lastIdx = -1;
+
+function cacheSectionOffsets() {
+  sectionOffsets = NAV_SECTIONS.map(id => {
+    const el = document.getElementById(id);
+    return el ? el.offsetTop : 0;
+  });
+}
 
 function getActiveIndex() {
-  const scrollY = window.scrollY + 130;
+  const scrollY = window.scrollY + 140;
   let active = 0;
-  NAV_SECTIONS.forEach((id, i) => {
-    const el = document.getElementById(id);
-    if (el && el.offsetTop <= scrollY) active = i;
-  });
+  for (let i = 0; i < sectionOffsets.length; i++) {
+    if (sectionOffsets[i] <= scrollY) active = i;
+  }
   return active;
 }
 
-let lastIdx = -1;
 function updateNav() {
   const activeIdx = getActiveIndex();
   if (activeIdx === lastIdx) return;
-
-  const prevIdx = lastIdx;
   lastIdx = activeIdx;
 
-  navLinks.forEach((a, i) => {
-    if (a.classList.contains('nav-cta')) return;
-
-    // Flash out the link that was previously active
-    if (i === prevIdx && prevIdx !== -1) {
-      a.style.transition = 'opacity 0.18s ease, transform 0.18s ease';
-      a.style.opacity = '0';
-      a.style.transform = 'translateX(10px)';
-      setTimeout(() => {
-        a.style.transition = '';
-        applyNavState(a, i, activeIdx);
-      }, 190);
-    } else {
-      applyNavState(a, i, activeIdx);
+  sectionLinks.forEach((a, i) => {
+    a.classList.remove('nav-active', 'nav-past');
+    if (i === activeIdx) {
+      a.classList.add('nav-active');
+    } else if (i < activeIdx) {
+      a.classList.add('nav-past');
     }
   });
 }
 
-function applyNavState(a, i, activeIdx) {
-  a.classList.remove('nav-active', 'nav-past');
-  a.style.transform = '';
-  a.style.opacity = '';
-
-  if (i === activeIdx) {
-    a.classList.add('nav-active');
-  } else if (i < activeIdx) {
-    a.classList.add('nav-past');
-    const depth = activeIdx - i;
-    a.style.transform = `translateX(-${18 + depth * 5}px)`;
-    a.style.opacity = `${Math.max(0.1, 0.32 - depth * 0.06)}`;
+function onScroll() {
+  if (!isNavTicking) {
+    requestAnimationFrame(() => {
+      updateNav();
+      isNavTicking = false;
+    });
+    isNavTicking = true;
   }
 }
 
-window.addEventListener('scroll', updateNav, { passive: true });
+window.addEventListener('scroll', onScroll, { passive: true });
+window.addEventListener('resize', cacheSectionOffsets, { passive: true });
+window.addEventListener('load', cacheSectionOffsets, { passive: true });
+cacheSectionOffsets();
 updateNav(); // run on load
 
 // Donation feature disabled per client request
@@ -135,6 +140,9 @@ window.addEventListener('DOMContentLoaded', () => {
 
   // 2. Render first batch
   renderGalleryBatch();
+
+  // 3. Automatically check and update event statuses (Upcoming vs Past)
+  updateEventStatuses();
 });
 
 function renderGalleryBatch() {
@@ -147,9 +155,10 @@ function renderGalleryBatch() {
   
   // Get the next batch of 9 items
   const batch = filteredData.slice(galleryLoadedCount, galleryLoadedCount + ITEMS_PER_LOAD);
+  const fragment = document.createDocumentFragment();
   
   batch.forEach((item, idx) => {
-    const delay = (idx % ITEMS_PER_LOAD) * 0.05;
+    const delay = (idx % ITEMS_PER_LOAD) * 0.04;
     const height = 180 + (item.index % 3) * 40; // Masonry varied heights
     
     const div = document.createElement('div');
@@ -164,13 +173,13 @@ function renderGalleryBatch() {
     const alignment = imageAlignments[imageName] || 'center';
 
     div.innerHTML = `
-      <img class="gallery-thumb" src="assets/gallery/${item.folder}/${item.prefix}${item.index}.jpeg" alt="${item.label}" style="height:${height}px; object-fit:cover; object-position:${alignment};" loading="lazy" />
+      <img class="gallery-thumb" src="assets/gallery/${item.folder}/${item.prefix}${item.index}.jpeg" alt="${item.label}" style="height:${height}px; object-fit:cover; object-position:${alignment};" loading="lazy" decoding="async" />
       <div class="gallery-overlay"><span>${item.label}</span></div>
     `;
-    grid.appendChild(div);
-    
-    if (typeof revealObs !== 'undefined') revealObs.observe(div);
+    fragment.appendChild(div);
   });
+  
+  grid.appendChild(fragment);
   
   galleryLoadedCount += batch.length;
   
@@ -183,15 +192,58 @@ function renderGalleryBatch() {
   
   // Update Lightbox items array so new items can be navigated
   lbItems = Array.from(document.querySelectorAll('.gallery-item')).filter(i => i.style.display !== 'none');
+  setTimeout(cacheSectionOffsets, 100);
 }
 
 function loadMoreGallery() {
   renderGalleryBatch();
 }
 
+// ══ AUTO EVENT STATUS (UPCOMING vs PAST) ══
+function updateEventStatuses() {
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
+
+  document.querySelectorAll('.event-card').forEach(card => {
+    const endDateStr = card.getAttribute('data-end-date');
+    if (!endDateStr) return;
+
+    const endDate = new Date(endDateStr);
+    endDate.setHours(23, 59, 59, 999);
+
+    const badge = card.querySelector('.event-badge');
+    const footer = card.querySelector('.event-footer');
+    let typeAttr = card.getAttribute('data-type') || '';
+
+    if (today > endDate) {
+      // Event has concluded -> Automatically move to past
+      typeAttr = typeAttr.replace(/\bupcoming\b/g, '').trim() + ' past';
+      card.setAttribute('data-type', typeAttr.trim());
+      card.classList.add('event-past-card');
+      if (badge) {
+        badge.className = 'event-badge badge-past';
+        badge.textContent = 'Completed';
+      }
+      if (footer && card.querySelector('a.btn-primary')) {
+        footer.innerHTML = '<span class="btn-past" style="color:rgba(255,255,255,0.4);border-color:rgba(255,255,255,0.15);font-weight:500;text-align:center;">Event Concluded</span>';
+      }
+    } else {
+      // Event is upcoming
+      if (!typeAttr.includes('upcoming')) {
+        typeAttr = typeAttr.replace(/\bpast\b/g, '').trim() + ' upcoming';
+        card.setAttribute('data-type', typeAttr.trim());
+      }
+      if (badge) {
+        badge.className = 'event-badge badge-upcoming';
+        badge.textContent = 'Upcoming';
+      }
+    }
+  });
+}
+
 // ══ EVENTS FILTER ══
 function filterEvents(btn, type) {
-  document.querySelectorAll('.filter-bar .filter-btn').forEach(b => b.classList.remove('active'));
+  document.querySelectorAll('.events-section .filter-bar .filter-btn').forEach(b => b.classList.remove('active'));
   btn.classList.add('active');
   document.querySelectorAll('.event-card').forEach(card => {
     const types = card.getAttribute('data-type') || '';
