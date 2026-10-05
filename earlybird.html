@@ -1,1 +1,1751 @@
+<!DOCTYPE html>
+<html lang="en">
 
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width,initial-scale=1.0" name="viewport" />
+    <title>Camp Ekklesia 2026 Registration — Rebuilders</title>
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="logo.ico">
+    <!-- Preconnect to Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&amp;family=DM+Sans:wght@300;400;500;600;700&amp;display=swap"
+        rel="stylesheet" />
+    <link href="css/style.css" rel="stylesheet" />
+    
+    <style>
+        /* Form Page Adjustments */
+        .register-grid {
+            display: grid;
+            grid-template-columns: 1.1fr 1.5fr;
+            gap: 4rem;
+            align-items: start;
+            margin-top: 2rem;
+        }
+
+        .camp-details-card {
+            background: rgba(200, 225, 0, 0.07);
+            border: 1px solid rgba(200, 225, 0, 0.25);
+            border-radius: 16px;
+            padding: 1.5rem;
+            margin-top: 1.75rem;
+        }
+
+        .camp-details-card .detail-row {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            margin-bottom: 0.75rem;
+            font-size: 1rem;
+        }
+
+        .camp-details-card .detail-row:last-child {
+            margin-bottom: 0;
+        }
+
+        .camp-details-card .detail-row strong {
+            color: var(--lime);
+        }
+
+        .form-section-title {
+            color: var(--lime);
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
+            margin: 1.75rem 0 1rem;
+            padding-bottom: 0.35rem;
+            border-bottom: 1px dashed rgba(200, 225, 0, 0.2);
+            font-weight: 700;
+        }
+
+        .form-section-title:first-of-type {
+            margin-top: 0;
+        }
+
+        .form-group select {
+            width: 100%;
+        }
+
+        .form-row.custom-three-cols {
+            display: grid;
+            grid-template-columns: 1.2fr 1fr 1fr;
+            gap: 1.25rem;
+            margin-bottom: 1.25rem;
+        }
+
+        .helper-text {
+            font-size: 0.75rem;
+            color: rgba(255, 255, 255, 0.45);
+            margin-top: -0.85rem;
+            margin-bottom: 1.25rem;
+            display: block;
+            line-height: 1.4;
+        }
+
+        @media (max-width: 992px) {
+            .register-grid {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .form-row.custom-three-cols {
+                grid-template-columns: 1fr;
+                gap: 0;
+            }
+        }
+
+        .qr-container {
+            background: white;
+            padding: 1rem;
+            border-radius: 16px;
+            display: inline-block;
+            margin: 1.25rem auto 1.5rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+            border: 3px solid var(--lime);
+            max-width: 220px;
+        }
+
+        .qr-container img {
+            width: 100%;
+            height: auto;
+            display: block;
+            border-radius: 8px;
+        }
+
+        .qr-link {
+            display: block;
+            transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        .qr-link:hover {
+            transform: scale(1.04);
+        }
+
+        .btn-back {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.25);
+            color: rgba(255, 255, 255, 0.85);
+            font-size: 0.85rem;
+            font-weight: 500;
+            padding: 0.55rem 1.1rem;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            margin-bottom: 1.25rem;
+        }
+
+        .btn-back:hover {
+            border-color: var(--lime);
+            color: var(--lime);
+            background: rgba(200, 225, 0, 0.08);
+        }
+
+        /* Theme Poster Styling */
+        .theme-poster-card {
+            position: relative;
+            border-radius: 18px;
+            overflow: hidden;
+            margin-bottom: 1.75rem;
+            border: 1.5px solid rgba(200, 225, 0, 0.35);
+            box-shadow: 0 16px 40px rgba(0, 0, 0, 0.45), 0 0 35px rgba(255, 69, 0, 0.15);
+            background: #0d0614;
+            transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.3s ease;
+        }
+
+        .theme-poster-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 22px 50px rgba(0, 0, 0, 0.6), 0 0 45px rgba(200, 225, 0, 0.25);
+            border-color: var(--lime);
+        }
+
+        .theme-poster-img {
+            width: 100%;
+            height: auto;
+            display: block;
+            object-fit: cover;
+        }
+
+        .theme-poster-badge {
+            position: absolute;
+            top: 14px;
+            right: 14px;
+            background: rgba(10, 5, 20, 0.85);
+            backdrop-filter: blur(8px);
+            border: 1px solid var(--lime);
+            color: var(--lime);
+            font-size: 0.72rem;
+            font-weight: 700;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            padding: 0.35rem 0.85rem;
+            border-radius: 20px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+        }
+
+        .theme-poster-caption {
+            padding: 0.9rem 1.25rem;
+            background: linear-gradient(180deg, rgba(20, 10, 30, 0.95), rgba(10, 5, 18, 0.98));
+            border-top: 1px solid rgba(255, 255, 255, 0.08);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 0.75rem;
+        }
+
+        .theme-poster-caption .caption-title {
+            font-size: 0.88rem;
+            font-weight: 700;
+            color: #fff;
+            margin: 0;
+            letter-spacing: 0.04em;
+        }
+
+        .theme-poster-caption .caption-scripture {
+            font-size: 0.78rem;
+            color: var(--lime);
+            font-weight: 600;
+            margin: 0;
+        }
+
+        .divider-or {
+            display: flex;
+            align-items: center;
+            text-align: center;
+            margin: 1.5rem 0;
+            color: rgba(255, 255, 255, 0.45);
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            font-weight: 700;
+        }
+
+        .divider-or::before,
+        .divider-or::after {
+            content: '';
+            flex: 1;
+            border-bottom: 1px dashed rgba(255, 255, 255, 0.18);
+        }
+
+        .divider-or:not(:empty)::before {
+            margin-right: 1rem;
+        }
+
+        .divider-or:not(:empty)::after {
+            margin-left: 1rem;
+        }
+
+        .btn-pay-later {
+            width: 100%;
+            background: rgba(255, 255, 255, 0.06);
+            border: 1.5px solid rgba(200, 225, 0, 0.35);
+            color: var(--white);
+            padding: 0.85rem 1.25rem;
+            border-radius: 30px;
+            font-size: 0.95rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.25s ease;
+            display: block;
+            text-align: center;
+        }
+
+        .btn-pay-later:hover {
+            background: rgba(200, 225, 0, 0.12);
+            border-color: var(--lime);
+            color: var(--lime);
+            transform: translateY(-2px);
+        }
+
+        /* Quantity controls for Sponsor Camper */
+        .qty-controls {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.75rem;
+            background: rgba(255, 255, 255, 0.07);
+            border: 1px solid rgba(200, 225, 0, 0.35);
+            border-radius: 30px;
+            padding: 0.35rem 0.75rem;
+            width: fit-content;
+        }
+
+        .qty-btn {
+            width: 34px;
+            height: 34px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.12);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: #fff;
+            font-size: 1.25rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            user-select: none;
+        }
+
+        .qty-btn:hover:not(:disabled) {
+            background: var(--lime);
+            color: #0a0a1a;
+            border-color: var(--lime);
+        }
+
+        .qty-btn:disabled {
+            opacity: 0.35;
+            cursor: not-allowed;
+        }
+
+        .qty-value {
+            font-size: 1.2rem;
+            font-weight: 800;
+            color: var(--lime);
+            min-width: 2.5rem;
+            text-align: center;
+        }
+
+        .limit-warning-box {
+            background: rgba(255, 77, 77, 0.15);
+            border: 1.5px solid #ff4d4d;
+            border-radius: 12px;
+            padding: 0.9rem 1.15rem;
+            margin-bottom: 1.25rem;
+            display: none;
+            align-items: flex-start;
+            gap: 0.65rem;
+            color: #fff;
+            font-size: 0.88rem;
+            line-height: 1.45;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .limit-warning-box strong {
+            color: #ff6b6b;
+        }
+
+        /* Voluntary Declaration Checkbox & Locked Payment Styles */
+        .declaration-card {
+            background: rgba(200, 225, 0, 0.05);
+            border: 1.5px solid rgba(200, 225, 0, 0.3);
+            border-radius: 14px;
+            padding: 1.15rem 1.25rem;
+            margin-bottom: 1.5rem;
+            text-align: left;
+            transition: all 0.3s ease;
+        }
+
+        .declaration-card.declared {
+            border-color: rgba(56, 239, 125, 0.6);
+            background: rgba(56, 239, 125, 0.06);
+        }
+
+        .declaration-label {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.85rem;
+            cursor: pointer;
+            user-select: none;
+        }
+
+        .declaration-label input[type="checkbox"] {
+            margin-top: 0.25rem;
+            width: 20px;
+            height: 20px;
+            accent-color: var(--lime);
+            cursor: pointer;
+            flex-shrink: 0;
+        }
+
+        .declaration-text {
+            font-size: 0.83rem;
+            color: rgba(255, 255, 255, 0.88);
+            line-height: 1.55;
+        }
+
+        .declaration-text strong {
+            color: var(--lime);
+        }
+
+        /* Blurred QR Wrapper */
+        .qr-lock-wrapper {
+            position: relative;
+            display: inline-block;
+        }
+
+        .qr-container.blurred-qr {
+            filter: blur(10px) grayscale(80%);
+            opacity: 0.45;
+            pointer-events: none;
+            user-select: none;
+            transition: filter 0.4s ease, opacity 0.4s ease;
+        }
+
+        .qr-lock-overlay {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(12, 8, 24, 0.88);
+            border: 1.5px solid rgba(200, 225, 0, 0.4);
+            border-radius: 12px;
+            padding: 0.65rem 1rem;
+            color: #ffffff;
+            font-size: 0.82rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            pointer-events: none;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.6);
+            white-space: nowrap;
+            transition: opacity 0.3s ease;
+            z-index: 5;
+        }
+
+        /* Inactive Tap-to-Pay Button */
+        .btn-primary.upi-locked {
+    opacity: 0.4;
+    pointer-events: none;
+    cursor: not-allowed;
+    filter: grayscale(80%);
+}
+
+/* Generic lock style for other buttons */
+.button-locked {
+    opacity: 0.4;
+    pointer-events: none;
+    cursor: not-allowed;
+    filter: grayscale(80%);
+}
+
+    </style>
+</head>
+
+<body>
+    <!-- STICKY SOCIAL SIDEBAR -->
+    <div class="sticky-social-bar">
+        <a href="https://youtube.com/@rebuildersindia?si=xe-K7ssod9X3bIw_" target="_blank" aria-label="YouTube"
+            class="social-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path
+                    d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.4 19c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.25 29 29 0 0 0-.46-5.33z">
+                </path>
+                <polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02"></polygon>
+            </svg>
+        </a>
+        <a href="https://www.instagram.com/rebuilders.in?igsh=MWlhbG42cTN5MXMwbg==" target="_blank"
+            aria-label="Instagram" class="social-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+            </svg>
+        </a>
+        <a href="https://www.facebook.com/share/17aKpvCF8J/" target="_blank" aria-label="Facebook" class="social-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path>
+            </svg>
+        </a>
+        <a href="https://chat.whatsapp.com/LniyQV9UKSy5XrZ8KiKHNy" target="_blank" aria-label="WhatsApp"
+            class="social-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M3 21l1.65 -3.8a9 9 0 1 1 3.4 2.9l-5.05 .9" />
+                <path d="M9 10a.5 .5 0 0 0 1 0v-1a.5 .5 0 0 0 -1 0v1a5 5 0 0 0 5 5h1a.5 .5 0 0 0 0 -1h-1a.5 .5 0 0 0 0 1" />
+            </svg>
+        </a>
+    </div>
+
+    <!-- NAVBAR -->
+    <nav>
+        <img alt="Rebuilders" class="nav-logo-img" onclick="window.location.href='index.html#hero'" src="assets/image1.jpeg" />
+        <div class="nav-plumbline">
+            <div class="plumb-wrap">
+                <div class="plumb-line"></div>
+                <div class="plumb-bob"></div>
+                <span class="plumb-label">Zech 4:9</span>
+            </div>
+        </div>
+        <ul class="nav-links" id="navLinks">
+            <li><a href="index.html#hero">Home</a></li>
+            <li><a href="index.html#about">About</a></li>
+            <li><a href="index.html#process">Process</a></li>
+            <li><a href="index.html#initiatives">Initiatives</a></li>
+            <li><a href="index.html#events">Events</a></li>
+            <li><a href="index.html#gallery">Gallery</a></li>
+            <li><a href="index.html#prayer">Prayer</a></li>
+
+            <li><a class="nav-cta" href="index.html#join">Join Us</a></li>
+        </ul>
+        <button class="hamburger" id="hamburger" onclick="toggleMenu()">
+            <span></span><span></span><span></span>
+        </button>
+    </nav>
+
+    <!-- ══ HERO ══ -->
+    <div class="section-hero" id="register-hero">
+        <div class="section-hero-bg"></div>
+        <p class="section-label">Camp Ekklesia 2026</p>
+        <h2>Register <span class="hl">Your Spot</span></h2>
+        <p>Not Just a Camp. A Movement. A Moment.</p>
+    </div>
+
+    <!-- ══ CONTENT SECTION ══ -->
+    <section class="prayer-section">
+        <div class="container">
+            <div class="register-grid">
+                
+                <!-- LEFT COLUMN: CAMP INFO -->
+                <div class="prayer-info reveal">
+                    <!-- ══ OFFICIAL THEME POSTER ══ -->
+                    <div class="theme-poster-card">
+                        <span class="theme-poster-badge">🔥 Theme 2026</span>
+                        <a href="assets/ekklesia-theme-poster.jpg" target="_blank" title="Click to view full theme poster">
+                            <img src="assets/ekklesia-theme-poster.jpg" alt="Camp Ekklesia 2026 - Frequency Theme Poster" class="theme-poster-img" loading="eager" />
+                        </a>
+                        <div class="theme-poster-caption">
+                            <div>
+                                <p class="caption-title">FREQUENCY · Ekklesia 13</p>
+                                <p style="font-size:0.75rem; color:rgba(255,255,255,0.6); margin:0;">"Amidst the noise, tune into His voice"</p>
+                            </div>
+                            <p class="caption-scripture">John 10:27</p>
+                        </div>
+                    </div>
+
+                    <p class="section-label">3-Day Camp: Encounter. Ignite. Elevate.</p>
+                    <h2 class="section-title">A 3-Day Deep Dive Into God's Presence</h2>
+                    <p>Take a break from the endless scroll and step into something real. This isn’t just another camp — it’s a 3-day deep dive into God’s presence, where faith gets real, friendships grow strong, and your heart catches fire again.</p>
+                    
+                    <div class="camp-details-card" id="earlyBirdDetailsCard">
+                        <div id="earlyBirdBanner" style="background: linear-gradient(135deg, rgba(200, 225, 0, 0.18), rgba(56, 239, 125, 0.12)); border: 1.5px solid var(--lime); border-radius: 12px; padding: 0.75rem 1rem; margin-bottom: 1rem; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 0.5rem;">
+                            <span style="color: var(--lime); font-weight: 800; font-size: 0.92rem; text-transform: uppercase; letter-spacing: 0.05em;">⚡ Early Bird Offer Active</span>
+                            
+                        </div>
+                        <div class="detail-row">
+                            <span>📅</span> <span><strong>When:</strong> Dec 27 (Sun, 5 PM) – Dec 30 (Wed, 3:30 PM), 2026</span>
+                        </div>
+                        <div class="detail-row">
+                            <span>💰</span> 
+                            <span id="feeDisplayRow">
+                                <strong>Fee:</strong> <span style="text-decoration: line-through; opacity: 0.6; margin-right: 0.35rem; color: #ff6b6b; font-weight: 700; font-size: 1.05rem;">₹1200</span> <strong style="color: var(--lime); font-size: 1.25rem;">₹1150</strong> <span style="font-size: 0.88rem; color: rgba(255,255,255,0.85);">(3 days of food + stay included!)</span>
+                            </span>
+                        </div>
+                        <div id="feeNoteBox" style="margin-top: 0.85rem; padding-top: 0.85rem; border-top: 1px dashed rgba(200, 225, 0, 0.25); font-size: 0.88rem; color: rgba(255,255,255,0.9); line-height: 1.55;">
+                            📌 <strong>Fee:</strong> ₹1200 (3 days of food + stay included!)<br>
+                            ⚡ <strong>Early Bird:</strong> ₹1150 for the first 50 paid registrations
+                        </div>
+                    </div>
+
+                    <div class="prayer-promises">
+                        <div class="promise-card">
+                            <div class="ref">Raw, Life-Changing Talks</div>
+                            <p>Speakers bringing truth and perspective you actually need right now.</p>
+                        </div>
+                        <div class="promise-card">
+                            <div class="ref">Worship That Hits Different</div>
+                            <p>Music + prayer moments to connect with God like never before. Ooof!</p>
+                        </div>
+                        <div class="promise-card">
+                            <div class="ref">Squad Goals IRL</div>
+                            <p>Meet new friends, laugh hard, and make memories worth way more than a highlight reel.</p>
+                        </div>
+                        <div class="promise-card">
+                            <div class="ref">Quiet Space for Your Soul</div>
+                            <p>Slow down, listen, and let God reset your vibe.</p>
+                        </div>
+                    </div>
+
+                    <p style="margin-top: 2rem;">This camp is your shot to level up spiritually and step into the new year with purpose and fire.</p>
+                    <p><strong>Spots are limited — lock in your spot today!</strong></p>
+                </div>
+
+                <!-- RIGHT COLUMN: FORM -->
+                <div class="prayer-form-wrap reveal" style="transition-delay: 0.15s;">
+                    <div id="formSection">
+                        <h3>Registration Form</h3>
+                        <p class="sub">Fill out the details below to secure your entry.</p>
+
+                        <form id="ekklesiaForm" onsubmit="handleRegistrationSubmit(event)">
+                            
+                            <!-- Invisible Honeypot Field for Bot Protection -->
+                            <div style="display: none !important; opacity: 0; position: absolute; left: -9999px;" aria-hidden="true">
+                                <input type="text" id="website_hp" name="website_hp" tabindex="-1" autocomplete="off" />
+                            </div>
+
+                            <!-- SECTION 1: IDENTITY -->
+                            <div class="form-section-title">1. Tell Us About Yourself</div>
+                            
+                            <div class="form-group">
+                                <label for="fullName">What's your name? Just so we know who to look for if you're running late to breakfast *</label>
+                                <input id="fullName" placeholder="Enter your full name" type="text"
+                                    pattern="[A-Za-z\s]+" title="Please enter letters only — no numbers or special characters."
+                                    oninput="this.value = this.value.replace(/[^A-Za-z\s]/g, '')" required />
+                            </div>
+
+                            <div class="form-row custom-three-cols">
+                                <div class="form-group">
+                                    <label for="gender">God's Image? (Gender) *</label>
+                                    <select id="gender" required>
+                                        <option value="">Select...</option>
+                                        <option value="Son of the King 👑">Son of the King 👑</option>
+                                        <option value="Daughter of the King 👸">Daughter of the King 👸</option>
+                                    </select>
+                                </div>
+                                <div class="form-group" style="grid-column: span 2;">
+                                    <label for="ageGroup">Life's journey? *</label>
+                                    <select id="ageGroup" required>
+                                        <option value="">Select your age range...</option>
+                                        <option value="Young Visionaries (13–18)">Young Visionaries (13–18)</option>
+                                        <option value="Quarter-life Explorers (19–24)">Quarter-life Explorers (19–24)</option>
+                                        <option value="Young Pro Energy (25–30)">Young Pro Energy (25–30)</option>
+                                        <option value="Mature & Mindful (31+)">Mature & Mindful (31+)</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="whatsapp">WhatsApp Number *</label>
+                                    <input id="whatsapp" placeholder="10-digit WhatsApp number" type="tel"
+                                        pattern="[0-9]{10}" maxlength="10"
+                                        oninput="this.value = this.value.replace(/[^0-9]/g, '')"
+                                        title="Please enter a valid 10-digit WhatsApp number."
+                                        oninvalid="this.setCustomValidity('Oops! Please enter exactly 10 digits — no spaces or letters.')"
+                                        onchange="this.setCustomValidity('')" required />
+                                    <span style="font-size:0.75rem; color:rgba(255,255,255,0.45); margin-top:0.25rem;">For all the holy updates!</span>
+                                </div>
+                                <div class="form-group">
+                                    <label for="email">Can we grab your email? *</label>
+                                    <input id="email" placeholder="For important camp secrets only!" type="email" required />
+                                </div>
+                            </div>
+
+                            <!-- SECTION 2: CONNECTION & REGION -->
+                            <div class="form-section-title">2. Connection & Region</div>
+
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="zone">Where’s your zone? *</label>
+                                    <select id="zone" required>
+                                        <option value="">Select region...</option>
+                                        <option value="Harbour Line">Harbour Line</option>
+                                        <option value="Central Line | CST - Thane">Central Line | CST - Thane</option>
+                                        <option value="Central Line | Kalwa - Khopoli">Central Line | Kalwa - Khopoli</option>
+                                        <option value="Western Line">Western Line</option>
+                                        <option value="Outside Mumbai">Outside Mumbai</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="firstCamp">Is this your first Camp? *</label>
+                                    <select id="firstCamp" required>
+                                        <option value="">Select option...</option>
+                                        <option value="Yeps, its my first time at Camp Ekklesia!">Yeps, its my first time at Camp Ekklesia!</option>
+                                        <option value="I've attended before and I'm in again!">I've attended before and I'm in again!</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <!-- SECTION 3: MANNA & GEAR -->
+                            <div class="form-section-title">3. Food & Merch sizing</div>
+
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="manna">Manna for the year-end 🍽️ *</label>
+                                    <select id="manna" required>
+                                        <option value="">Select diet...</option>
+                                        <option value="🌱 Vegetarian Goodness">🌱 Vegetarian Goodness</option>
+                                        <option value="🍗 Non-Veggie Delights">🍗 Non-Veggie Delights</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="tshirt">T-shirt size *</label>
+                                    <select id="tshirt" required>
+                                        <option value="">Select size...</option>
+                                        <option value="S/38">S/38</option>
+                                        <option value="M/40">M/40</option>
+                                        <option value="L/42">L/42</option>
+                                        <option value="XL/44">XL/44</option>
+                                        <option value="XXL/46">XXL/46</option>
+                                        <option value="3XL/48">3XL/48</option>
+                                        <option value="4XL/50">4XL/50</option>
+                                        <option value="5XL/52">5XL/52</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <span class="helper-text">(No no, no freebies, but in case you wanna purchase one, we wanna ensure we have the right size for you!)</span>
+
+                            <div class="form-group">
+                                <label for="travel">How do you roll? preferred travel mode *</label>
+                                <select id="travel" required>
+                                    <option value="">Select travel method...</option>
+                                    <option value="🚶‍♂️ I’ll reach directly">🚶‍♂️ I’ll reach directly</option>
+                                    <option value="🚌 By Bus – Classic camp style!">🚌 By Bus – Classic camp style!</option>
+                                    <option value="🚗 Carpool – Friends + road trip vibes! (Own)">🚗 Carpool – Friends + road trip vibes! (Own)</option>
+                                    <option value="🚴‍♂️ Bike – Extra adventurous! (Own)">🚴‍♂️ Bike – Extra adventurous! (Own)</option>
+                                </select>
+                            </div>
+
+                            <!-- SECTION 4: CARE & EMERGENCY -->
+                            <div class="form-section-title">4. Emergency Contact & Care Info</div>
+
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="emergencyName">Emergency contact (your "call them ASAP" person) *</label>
+                                    <input id="emergencyName" placeholder="Contact person's name" type="text"
+                                        pattern="[A-Za-z\s]+" title="Please enter letters only — no numbers or special characters."
+                                        oninput="this.value = this.value.replace(/[^A-Za-z\s]/g, '')" required />
+                                </div>
+                                <div class="form-group">
+                                    <label for="emergencyPhone">Emergency contact number *</label>
+                                    <input id="emergencyPhone" placeholder="10-digit mobile number" type="tel"
+                                        pattern="[0-9]{10}" maxlength="10"
+                                        oninput="this.value = this.value.replace(/[^0-9]/g, '')"
+                                        title="Please enter a valid 10-digit mobile number."
+                                        oninvalid="this.setCustomValidity('Oops! Please enter exactly 10 digits — no spaces or letters.')"
+                                        onchange="this.setCustomValidity('')" required />
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="healthConcerns">Any health concern we should know? (No stress, just to take care of you)</label>
+                                <input id="healthConcerns" placeholder="e.g. Allergies, asthma, regular medications, or 'None'..." type="text" />
+                            </div>
+
+                            <!-- Voluntary Attendance Declaration Checkbox -->
+                            <div class="declaration-card" id="declarationCard" style="margin-top: 1.5rem; margin-bottom: 1.25rem;">
+                                <label class="declaration-label" for="voluntaryDeclarationCheckbox">
+                                    <input type="checkbox" id="voluntaryDeclarationCheckbox" onchange="toggleDeclarationStatus()" required />
+                                    <span class="declaration-text">
+                                        "I, hereby solemnly declare that my attendance and participation in <strong>Ekklesia 13 (2026)</strong> is completely personal, voluntary, and an exercise of my own independent choice and free will. I explicitly affirm that I face no pressure, coercion, inducement, financial temptation, lure, misrepresentation, or threat of any kind from any individual, pastor, or organizer associated with this ministry to attend this camp or alter my beliefs. My presence here is entirely of my own accord."
+                                    </span>
+                                </label>
+                            </div>
+
+                            <!-- PRIVACY NOTE -->
+                            <div class="privacy-note" id="lockNoticeBox">
+                                <span class="icon">🔒</span>
+                                <p><strong>Fee: ₹1150</strong> covers food and stay. Once submitted, you'll be shown the payment details and options to confirm your seat.</p>
+                            </div>
+
+                            <button class="submit-btn" type="submit" style="margin-bottom: 0.75rem;">⛺ Submit Registration</button>
+                            
+                            <button type="button" class="btn-pay-later" onclick="submitPayLaterFromStep1()" style="display: none; width: 100%; text-align: center;">
+                                ⏳ Pay later &amp; add your name to waitlist
+                            </button>
+
+                            <p style="font-size: 0.85rem; color: #ffeb3b; text-align: center; margin-top: 0.65rem; margin-bottom: 0; line-height: 1.45; font-weight: 600;">
+
+                            </p>
+                        </form>
+                    </div>
+
+                    <!-- STEP 2: PAYMENT & SCREENSHOT UPLOAD STATE -->
+                    <div class="success-msg" id="paymentSection" style="padding: 2rem 1.5rem; display: none;">
+                        <button type="button" class="btn-back" onclick="goToStep1()">← Back to Edit Details</button>
+
+                        <div class="check-circle" style="font-size: 2rem;">💳</div>
+                        <h3 style="margin-bottom: 0.35rem;">You're Almost There!</h3>
+                        <p style="color: rgba(255,255,255,0.7); font-size: 0.95rem; margin-bottom: 1rem;">We've received your registration details 🙌</p>
+                        
+                        <!-- Polite & Friendly Payment Notice -->
+                        <div style="background: rgba(200, 225, 0, 0.07); border: 1px solid rgba(200, 225, 0, 0.25); border-radius: 12px; padding: 1rem 1.25rem; margin: 0 0 1.25rem; text-align: left;">
+                            <p style="font-size: 0.92rem; line-height: 1.55; color: rgba(255, 255, 255, 0.92); margin: 0;">
+                                ✨ <strong>Just one quick step left:</strong> To confirm and lock in your spot at Camp Ekklesia 2026, please complete the registration fee below. If you'd prefer to complete it a bit later, no worries at all — you can choose the <strong>Pay later &amp; add your name to waitlist</strong> option!
+                            </p>
+                        </div>
+
+                        <!-- Sponsor a Camper & Custom Contribution Section -->
+                        <div style="background: rgba(255, 255, 255, 0.05); border: 1.5px dashed rgba(200, 225, 0, 0.35); border-radius: 14px; padding: 1.25rem; margin-bottom: 1.5rem; text-align: left;">
+                            <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.5rem;">
+                                <span style="font-size: 1.25rem;">💛</span>
+                                <strong style="color: var(--lime); font-size: 1rem;">Want to Sponsor a Camper or Support the Camp?</strong>
+                            </div>
+                            <p style="font-size: 0.85rem; color: rgba(255, 255, 255, 0.82); line-height: 1.45; margin: 0 0 1rem;">
+                                Apart from paying for your own registration, if you'd like to support another youth or contribute willingly towards camp expenses, you can choose either or both options below. Your total amount and UPI QR will update automatically!
+                            </p>
+
+                            <!-- Option A: Sponsor Campers with Stepper (+ / -) -->
+                            <div style="margin-bottom: 1.15rem;">
+                                <label style="display: block; font-size: 0.85rem; font-weight: 600; color: var(--white); margin-bottom: 0.5rem;">
+                                    🤝 Number of Campers to Sponsor (₹1,200 each):
+                                </label>
+                                <div style="display: flex; align-items: center; gap: 1rem;">
+                                    <div class="qty-controls">
+                                        <button type="button" class="qty-btn" id="btnSponsorMinus" onclick="adjustSponsorCount(-1)" aria-label="Decrease campers">−</button>
+                                        <span class="qty-value" id="sponsorCountDisplay">0</span>
+                                        <button type="button" class="qty-btn" id="btnSponsorPlus" onclick="adjustSponsorCount(1)" aria-label="Increase campers">+</button>
+                                    </div>
+                                    <span id="sponsorCostPreview" style="font-size: 0.88rem; color: var(--lime); font-weight: 600;">+₹0</span>
+                                </div>
+                            </div>
+
+                            <!-- Option B: Custom Voluntary Contribution -->
+                            <div>
+                                <label for="customDonationAmount" style="display: block; font-size: 0.85rem; font-weight: 600; color: var(--white); margin-bottom: 0.4rem;">
+                                    🎁 Or Enter a Voluntary Support Amount (₹):
+                                </label>
+                                <input type="number" id="customDonationAmount" min="0" step="50" placeholder="e.g. 500, 1000, 2500..." oninput="calculateRegistrationTotal()" style="width: 100%; padding: 0.65rem 0.85rem; border-radius: 8px; background: #0c0818; border: 1px solid rgba(200, 225, 0, 0.3); color: #ffffff; font-size: 0.9rem;" />
+                            </div>
+                        </div>
+
+                        <!-- 1,00,000 UPI LIMIT ALERT BANNER -->
+                        <div class="limit-warning-box" id="upiLimitWarning">
+                            <span style="font-size: 1.35rem; line-height: 1;">⚠️</span>
+                            <div>
+                                <strong style="display: block; margin-bottom: 0.25rem;">UPI Transaction Limit Exceeded (Max ₹1,00,000)</strong>
+                                <span style="color: rgba(255, 255, 255, 0.9);">
+                                    Your selected total is <strong id="warningTotalAmount" style="color: #ff9999;">₹0</strong>. Due to standard banking UPI regulations, the maximum allowed per transaction is <strong>₹1,00,000</strong>. Please reduce the number of sponsored campers or voluntary contribution to proceed with UPI payment.
+                                </span>
+                            </div>
+                        </div>
+
+                        <!-- Breakdown & Total Display Box -->
+                        <div style="background: rgba(200, 225, 0, 0.08); border: 1px solid rgba(200, 225, 0, 0.28); border-radius: 12px; padding: 1rem 1.25rem; margin-bottom: 1.25rem; text-align: left;">
+                            <div style="display: flex; justify-content: space-between; font-size: 0.88rem; color: rgba(255, 255, 255, 0.85); margin-bottom: 0.35rem;">
+                                <span>Your Registration Fee:</span>
+                                <strong>₹1,150</strong>
+                            </div>
+                            <div id="breakdownSponsorRow" style="display: none; justify-content: space-between; font-size: 0.88rem; color: var(--lime); margin-bottom: 0.35rem;">
+                                <span id="breakdownSponsorLabel">Sponsored Campers (0):</span>
+                                <strong id="breakdownSponsorVal">+₹0</strong>
+                            </div>
+                            <div id="breakdownDonationRow" style="display: none; justify-content: space-between; font-size: 0.88rem; color: #38ef7d; margin-bottom: 0.35rem;">
+                                <span>Voluntary Support:</span>
+                                <strong id="breakdownDonationVal">+₹0</strong>
+                            </div>
+                            <div style="display: flex; justify-content: space-between; align-items: center; border-top: 1px dashed rgba(200, 225, 0, 0.25); padding-top: 0.6rem; margin-top: 0.5rem;">
+                                <span style="font-size: 1rem; font-weight: 700; color: #ffffff;">Total Payable:</span>
+                                <span id="regTotalDisplay" style="font-size: 1.35rem; font-weight: 900; color: var(--lime);">₹1,150</span>
+                            </div>
+                        </div>
+
+                        <div id="paymentMethodsArea">
+                            <p style="font-size: 0.95rem; color: var(--white); margin-bottom: 0.5rem;">
+                                Scan to pay <strong id="qrTotalLabel" style="color: var(--lime);">₹1,150</strong> via any UPI app:
+                            </p>
+                            
+                            <!-- Payment QR Code Container with Lock & Blur -->
+                            <div class="qr-lock-wrapper">
+                                <div class="qr-container blurred-qr" id="regQrContainer">
+                                    <a class="qr-link" id="regUpiLink" href="javascript:void(0);">
+                                        <img id="regQrImage" src="assets/payment-qr.jpg" alt="UPI Payment QR Code" />
+                                    </a>
+                                </div>
+                                <div class="qr-lock-overlay" id="qrLockOverlay">
+                                    <span>🔒</span> Tick declaration on Step 1 to unlock QR
+                                </div>
+                            </div>
+                            
+                            <a class="btn-primary upi-locked" id="regTapToPayBtn" style="width: 100%; text-align: center; margin-bottom: 1.5rem; text-decoration: none;" href="javascript:void(0);">
+                                💳 Tap to Pay <span id="tapToPayAmountText">₹1,150</span> via UPI
+                            </a>
+                        </div>
+                        
+                        <!-- UPLOAD SCREENSHOT -->
+                        <div id="uploadSection" style="padding: 1.25rem; background: rgba(255,255,255,0.05); border: 1.5px dashed rgba(200,225,0,0.3); border-radius: 12px; text-align: left;">
+                            <label style="font-size: 0.85rem; font-weight: 600; color: rgba(255,255,255,0.9); display: block; margin-bottom: 0.5rem; text-transform: uppercase; letter-spacing: 0.05em;">
+                                Upload Payment Screenshot (Confirms Seat) *
+                            </label>
+                            <input type="file" id="screenshotFile" accept="image/*" style="width:100%; padding:0.55rem; font-size:0.85rem; margin-bottom:1rem; background:rgba(255,255,255,0.08); border:1px solid rgba(255,255,255,0.12); border-radius:8px; color:var(--white);" />
+                            <button type="button" class="submit-btn" style="padding:0.75rem 1.25rem; font-size:0.9rem; border-radius:30px;" onclick="uploadPaymentScreenshot()">
+                                📤 Submit Payment Screenshot
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- STEP 3: FINAL THANK YOU & CONFIRMATION SCREEN -->
+                    <div class="success-msg" id="thankYouSection" style="padding: 2.5rem 1.5rem; display: none;">
+                        <div id="thankYouDynamicContent">
+                            <!-- Dynamic confirmation/waitlist message injected here -->
+                        </div>
+
+                        <div style="display: flex; flex-direction: column; gap: 0.85rem; margin-top: 1.75rem;">
+                            <a class="btn-primary" style="width: 100%; text-align: center; text-decoration: none; padding: 0.85rem;" href="index.html#hero">
+                                🏠 Return to Homepage
+                            </a>
+                            <button class="btn-primary" style="background: transparent; border: 1.5px solid rgba(255,255,255,0.3); color: var(--white); width: 100%; text-align: center; padding: 0.85rem;" onclick="resetRegistrationForm()">
+                                ⛺ Register Another Person
+                            </button>
+                        </div>
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- ══ FOOTER ══ -->
+    <footer>
+        <div class="footer-inner">
+            <img alt="Rebuilders Logo" class="footer-logo-img" onclick="window.location.href='index.html#hero'"
+                src="assets/image4.jpeg" loading="lazy" decoding="async" />
+            <p class="footer-scripture">"His hands have laid the foundation… his hands shall also complete it." —
+                Zechariah 4:9</p>
+            <p class="footer-copy">© 2026 Rebuilders · A movement led by the Spirit of God</p>
+        </div>
+    </footer>
+
+    <!-- JS Logic -->
+    <script>
+        // ══ GOOGLE SHEET & DRIVE CONNECTIVITY ══
+        const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwNAvy3ACmpLvjTECT8FcUBhFHvm5WXCNsanwTT6jS9WUSVginyYvDCstUOJC_MzDPqvQ/exec';
+        const SYNC_QUEUE_KEY = 'rebuilders_sync_queue_v1';
+        const UPI_ID = 'shanereji10@oksbi';
+        let BASE_REG_FEE = 1150;
+        const SPONSOR_COST_PER_CAMPER = 1200;
+        
+        // Track registration context
+        let latestRegistrationPhone = '';
+        let latestRegistrationName = '';
+        let latestTotalAmount = 1150;
+        let latestSponsorCount = 0;
+        let latestRegistrationData = null; // Holds registration data until payment action
+        let latestDonationAmount = 0;
+        let isSyncing = false;
+
+        function toggleMenu() {
+            document.getElementById('navLinks').classList.toggle('open');
+            document.getElementById('hamburger').classList.toggle('open');
+        }
+
+        function getFormattedTimestamp() {
+            const now = new Date();
+            const dd = String(now.getDate()).padStart(2, '0');
+            const mm = String(now.getMonth() + 1).padStart(2, '0');
+            const yy = String(now.getFullYear()).slice(-2);
+            const hh = String(now.getHours()).padStart(2, '0');
+            const min = String(now.getMinutes()).padStart(2, '0');
+            const ss = String(now.getSeconds()).padStart(2, '0');
+            return `${dd}/${mm}/${yy} ${hh}:${min}:${ss}`;
+        }
+
+        // Updated format: Name_DD_MM_YY_HH_MM_SS (24 hours)
+        function formatScreenshotFileName(name, phone) {
+            const cleanName = (name || 'Participant').trim().replace(/[^a-zA-Z0-9]/g, '_');
+            const now = new Date();
+            const dd = String(now.getDate()).padStart(2, '0');
+            const mm = String(now.getMonth() + 1).padStart(2, '0');
+            const yy = String(now.getFullYear()).slice(-2);
+            const hh = String(now.getHours()).padStart(2, '0');
+            const min = String(now.getMinutes()).padStart(2, '0');
+            const ss = String(now.getSeconds()).padStart(2, '0');
+            return `${cleanName}_${dd}_${mm}_${yy}_${hh}_${min}_${ss}.jpg`;
+        }
+
+        const MAX_UPI_LIMIT = 100000;
+
+        // ══ STEPPER HELPER FOR SPONSOR CAMPERS (+ / -) ══
+        function adjustSponsorCount(delta) {
+            let nextCount = latestSponsorCount + delta;
+            if (nextCount < 0) nextCount = 0;
+            latestSponsorCount = nextCount;
+
+            const displayEl = document.getElementById('sponsorCountDisplay');
+            if (displayEl) displayEl.innerText = latestSponsorCount;
+
+            const minusBtn = document.getElementById('btnSponsorMinus');
+            if (minusBtn) minusBtn.disabled = (latestSponsorCount <= 0);
+
+            calculateRegistrationTotal();
+        }
+
+        // ══ DYNAMIC PAYMENT & SPONSORSHIP CALCULATOR ══
+        function calculateRegistrationTotal() {
+            const donationInputEl = document.getElementById('customDonationAmount');
+            let customDonation = parseFloat(donationInputEl?.value || '0');
+            if (isNaN(customDonation) || customDonation < 0) customDonation = 0;
+
+            latestDonationAmount = customDonation;
+
+            const sponsorSubtotal = latestSponsorCount * SPONSOR_COST_PER_CAMPER;
+            const totalPayable = BASE_REG_FEE + sponsorSubtotal + customDonation;
+            latestTotalAmount = totalPayable;
+
+            updateRegistrationPaymentUI(totalPayable, latestSponsorCount, sponsorSubtotal, customDonation);
+        }
+
+        function updateRegistrationPaymentUI(total, sponsorCount, sponsorSubtotal, customDonation) {
+            // Update sponsor count display & cost preview
+            const sponsorDisplay = document.getElementById('sponsorCountDisplay');
+            if (sponsorDisplay) sponsorDisplay.innerText = sponsorCount;
+
+            const sponsorCostPreview = document.getElementById('sponsorCostPreview');
+            if (sponsorCostPreview) {
+                sponsorCostPreview.innerText = sponsorCount > 0 ? `+₹${sponsorSubtotal.toLocaleString('en-IN')}` : '+₹0';
+            }
+
+            const minusBtn = document.getElementById('btnSponsorMinus');
+            if (minusBtn) minusBtn.disabled = (sponsorCount <= 0);
+
+            // Update breakdown rows
+            const sponsorRow = document.getElementById('breakdownSponsorRow');
+            const sponsorLabel = document.getElementById('breakdownSponsorLabel');
+            const sponsorVal = document.getElementById('breakdownSponsorVal');
+            if (sponsorCount > 0) {
+                if (sponsorRow) sponsorRow.style.display = 'flex';
+                if (sponsorLabel) sponsorLabel.innerText = `Sponsored Campers (${sponsorCount}):`;
+                if (sponsorVal) sponsorVal.innerText = `+₹${sponsorSubtotal.toLocaleString('en-IN')}`;
+            } else {
+                if (sponsorRow) sponsorRow.style.display = 'none';
+            }
+
+            const donationRow = document.getElementById('breakdownDonationRow');
+            const donationVal = document.getElementById('breakdownDonationVal');
+            if (customDonation > 0) {
+                if (donationRow) donationRow.style.display = 'flex';
+                if (donationVal) donationVal.innerText = `+₹${customDonation.toLocaleString('en-IN')}`;
+            } else {
+                if (donationRow) donationRow.style.display = 'none';
+            }
+
+            // Update Total Displays
+            const formattedTotal = `₹${total.toLocaleString('en-IN')}`;
+            const totalDisplay = document.getElementById('regTotalDisplay');
+            const qrTotalLabel = document.getElementById('qrTotalLabel');
+            const tapToPayAmountText = document.getElementById('tapToPayAmountText');
+
+            if (totalDisplay) totalDisplay.innerText = formattedTotal;
+            if (qrTotalLabel) qrTotalLabel.innerText = formattedTotal;
+            if (tapToPayAmountText) tapToPayAmountText.innerText = formattedTotal;
+
+            // UPI Limit Enforcement (₹1,00,000 maximum)
+            const warningBox = document.getElementById('upiLimitWarning');
+            const warningTotal = document.getElementById('warningTotalAmount');
+            const paymentMethodsArea = document.getElementById('paymentMethodsArea');
+
+            if (total > MAX_UPI_LIMIT) {
+                if (warningBox) warningBox.style.display = 'flex';
+                if (warningTotal) warningTotal.innerText = formattedTotal;
+                if (paymentMethodsArea) {
+                    paymentMethodsArea.style.opacity = '0.35';
+                    paymentMethodsArea.style.pointerEvents = 'none';
+                }
+            } else {
+                if (warningBox) warningBox.style.display = 'none';
+                if (paymentMethodsArea) {
+                    paymentMethodsArea.style.opacity = '1';
+                    paymentMethodsArea.style.pointerEvents = 'auto';
+                }
+
+                // Generate UPI URI
+                const upiUri = `upi://pay?pa=${UPI_ID}&pn=Rebuilders&am=${total}&cu=INR&tn=Ekklesia%2013%202026`;
+                const qrImg = document.getElementById('regQrImage');
+
+                // Dynamically generate QR code
+                if (qrImg) {
+                    qrImg.src = `https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=${encodeURIComponent(upiUri)}`;
+                }
+
+                // Refresh lock state on links/buttons based on declaration
+                applyDeclarationLockState(upiUri);
+            }
+        }
+
+        // ══ VOLUNTARY ATTENDANCE DECLARATION TOGGLE ══
+        function toggleDeclarationStatus() {
+            const upiUri = `upi://pay?pa=${UPI_ID}&pn=Rebuilders&am=${latestTotalAmount}&cu=INR&tn=Ekklesia%2013%202026`;
+            applyDeclarationLockState(upiUri);
+        }
+
+        function applyDeclarationLockState(upiUri) {
+            const checkbox = document.getElementById('voluntaryDeclarationCheckbox');
+            const declarationCard = document.getElementById('declarationCard');
+            const qrContainer = document.getElementById('regQrContainer');
+            const qrLockOverlay = document.getElementById('qrLockOverlay');
+            const tapBtn = document.getElementById('regTapToPayBtn');
+            const qrLink = document.getElementById('regUpiLink');
+
+            const isDeclared = !!checkbox?.checked;
+
+            if (declarationCard) {
+                if (isDeclared) declarationCard.classList.add('declared');
+                else declarationCard.classList.remove('declared');
+            }
+
+            if (isDeclared) {
+                // UNLOCK & UNBLUR
+                if (qrContainer) qrContainer.classList.remove('blurred-qr');
+                if (qrLockOverlay) qrLockOverlay.style.display = 'none';
+
+                if (tapBtn) {
+                    tapBtn.classList.remove('upi-locked');
+                    tapBtn.href = upiUri;
+                }
+                if (qrLink) qrLink.href = upiUri;
+
+                // Unlock upload section
+                const uploadSection = document.getElementById('uploadSection');
+                if (uploadSection) {
+                    uploadSection.style.opacity = '1';
+                    uploadSection.style.pointerEvents = 'auto';
+                    const fileInput = uploadSection.querySelector('input[type="file"]');
+                    const uploadBtn = uploadSection.querySelector('button');
+                    if (fileInput) fileInput.disabled = false;
+                    if (uploadBtn) {
+                        uploadBtn.disabled = false;
+                        uploadBtn.classList.remove('button-locked');
+                    }
+                }
+
+                // Unlock pay later section`r`n                const payLaterSection = document.getElementById('payLaterSection');
+                if (payLaterSection) {
+                    const btn = payLaterSection.querySelector('button');
+                    if (btn) {
+                        btn.disabled = false;
+                        btn.classList.remove('button-locked');
+                    }
+                    payLaterSection.style.opacity = '1';
+                    payLaterSection.style.pointerEvents = 'auto';
+                }
+
+            } else {
+                // LOCK & BLUR
+                if (qrContainer) qrContainer.classList.add('blurred-qr');
+                if (qrLockOverlay) qrLockOverlay.style.display = 'flex';
+
+                if (tapBtn) {
+                    tapBtn.classList.add('upi-locked');
+                    tapBtn.removeAttribute('href');
+                }
+                if (qrLink) qrLink.removeAttribute('href');
+
+                // Lock upload section
+                const uploadSection = document.getElementById('uploadSection');
+                if (uploadSection) {
+                    uploadSection.style.opacity = '0.35';
+                    uploadSection.style.pointerEvents = 'none';
+                    const fileInput = uploadSection.querySelector('input[type="file"]');
+                    const uploadBtn = uploadSection.querySelector('button');
+                    if (fileInput) fileInput.disabled = true;
+                    if (uploadBtn) {
+                        uploadBtn.disabled = true;
+                        uploadBtn.classList.add('button-locked');
+                    }
+                }
+
+                // Lock pay later section`r`n                const payLaterSection = document.getElementById('payLaterSection');
+                if (payLaterSection) {
+                    const btn = payLaterSection.querySelector('button');
+                    if (btn) {
+                        btn.disabled = true;
+                        btn.classList.add('button-locked');
+                    }
+                    payLaterSection.style.opacity = '0.35';
+                    payLaterSection.style.pointerEvents = 'none';
+                }
+            }
+        }
+
+        // Navigation helpers (Requirement 10)
+        function goToStep1() {
+            document.getElementById('formSection').style.display = 'block';
+            document.getElementById('paymentSection').style.display = 'none';
+            document.getElementById('thankYouSection').style.display = 'none';
+            const formCard = document.querySelector('.prayer-form-wrap');
+            if (formCard) formCard.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+
+        function goToStep2() {
+            document.getElementById('formSection').style.display = 'none';
+            document.getElementById('paymentSection').style.display = 'block';
+            document.getElementById('thankYouSection').style.display = 'none';
+            const formCard = document.querySelector('.prayer-form-wrap');
+            if (formCard) formCard.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+
+        function submitPayLaterFromStep1() {
+            // Honeypot bot check
+            const hpField = document.getElementById('website_hp');
+            if (hpField && hpField.value.trim() !== '') {
+                console.warn('Bot submission rejected.');
+                return;
+            }
+
+            const form = document.getElementById('ekklesiaForm');
+            if (!form.checkValidity()) {
+                form.reportValidity();
+                return;
+            }
+            const declCheckbox = document.getElementById('voluntaryDeclarationCheckbox');
+            if (!declCheckbox || !declCheckbox.checked) {
+                alert('Please tick the voluntary attendance declaration to proceed.');
+                declCheckbox.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                return;
+            }
+
+            const nameInput = document.getElementById('fullName').value.trim();
+            const phoneInput = document.getElementById('whatsapp').value.trim();
+            latestRegistrationName = nameInput;
+            latestRegistrationPhone = phoneInput;
+
+            latestRegistrationData = {
+                action: 'registration',
+                Timestamp: getFormattedTimestamp(),
+                Name: nameInput,
+                Gender: document.getElementById('gender').value,
+                AgeGroup: document.getElementById('ageGroup').value,
+                WhatsApp: phoneInput,
+                Email: document.getElementById('email').value.trim(),
+                Zone: document.getElementById('zone').value,
+                History: document.getElementById('firstCamp').value,
+                Diet: document.getElementById('manna').value,
+                TshirtSize: document.getElementById('tshirt').value,
+                TravelMode: document.getElementById('travel').value,
+                EmergencyContactPerson: document.getElementById('emergencyName').value.trim(),
+                EmergencyContactNumber: document.getElementById('emergencyPhone').value.trim(),
+                HealthConcerns: document.getElementById('healthConcerns').value.trim() || 'None',
+                PaymentProof: 'Pending'
+            };
+
+            calculateRegistrationTotal();
+            handlePayLater();
+        }
+
+        // Dynamic Thank You message based on user choice
+        function renderThankYouScreen(mode) {
+            const container = document.getElementById('thankYouDynamicContent');
+            if (!container) return;
+
+            const mandatoryNoticeHtml = `
+                <div style="background: rgba(255, 215, 0, 0.09); border: 1.5px solid rgba(255, 215, 0, 0.4); border-radius: 14px; padding: 1.25rem; margin-bottom: 1.5rem; text-align: left;">
+                    <p style="color: #ffd700; font-size: 0.98rem; font-weight: 800; margin: 0 0 0.75rem 0; display: flex; align-items: center; gap: 0.4rem; letter-spacing: 0.02em;">
+                        📌 <strong>Important Instructions &amp; Mandatory Documents</strong>
+                    </p>
+                    <p style="color: rgba(255, 255, 255, 0.95); line-height: 1.6; font-size: 0.88rem; margin: 0 0 0.65rem 0;">
+                        • <strong>Declaration form and Aadhaar Card:</strong> All participants must carry the Consent &amp; Self-Declaration Form, along with a photocopy of their Aadhaar Card, and submit these at the campsite for verification and registration.
+                    </p>
+                    <p style="color: rgba(255, 255, 255, 0.95); line-height: 1.6; font-size: 0.88rem; margin: 0 0 0.85rem 0;">
+                        • <strong>Participants Below 18 Years:</strong> Participants under 18 must bring the Parental Permission Form, duly signed by a parent/guardian, along with a photocopy of the parent/guardian’s Aadhaar Card, and submit these at the campsite.
+                    </p>
+                    <div style="border-top: 1px dashed rgba(255, 215, 0, 0.3); padding-top: 0.75rem; margin-top: 0.75rem;">
+                        <p style="color: var(--lime); line-height: 1.55; font-size: 0.88rem; margin: 0; font-weight: 700;">
+                            📧 <strong>Check Your Email:</strong>
+                        </p>
+                        <p style="color: rgba(255, 255, 255, 0.9); line-height: 1.5; font-size: 0.85rem; margin: 0.25rem 0 0 0;">
+                            Your Declaration / Parental Permission Form and Registration Receipt have been sent to your registered email address. Please check your Inbox, as well as your Spam / Promotions folder.
+                        </p>
+                    </div>
+                </div>
+            `;
+
+            if (mode === 'confirmed') {
+                container.innerHTML = `
+                    <div class="check-circle" style="background: rgba(56, 239, 125, 0.15); border: 2px solid #38ef7d; color: #38ef7d; font-size: 2.2rem; width: 72px; height: 72px; display: inline-flex; align-items: center; justify-content: center; border-radius: 50%; margin-bottom: 1.25rem;">✓</div>
+                    <h3 style="color: #ffffff; margin-bottom: 0.35rem; font-size: 1.75rem;">Welcome to Ekklesia 2026! 🎉</h3>
+                    <p style="color: #38ef7d; font-size: 1.05rem; font-weight: 700; margin-bottom: 1.5rem; letter-spacing: 0.02em;">Seat Confirmed · The 13th Edition: FREQUENCY</p>
+
+                    ${mandatoryNoticeHtml}
+
+                    <div style="background: rgba(56, 239, 125, 0.07); border: 1px solid rgba(56, 239, 125, 0.25); border-radius: 14px; padding: 1.35rem 1.25rem; text-align: left;">
+                        <p style="color: rgba(255, 255, 255, 0.95); line-height: 1.65; margin-bottom: 0.85rem; font-size: 0.98rem;">
+                            🙌 <strong>We're so glad you're joining us!</strong> We've received your registration details and your payment screenshot — you're all set for the 13th edition of Camp Ekklesia!
+                        </p>
+                        <p style="color: rgba(255, 255, 255, 0.88); line-height: 1.65; margin-bottom: 0.85rem; font-size: 0.95rem;">
+                            🔍 Our team will review your payment confirmation and <strong>reach out to you personally on WhatsApp</strong> with all camp updates, packing lists, and details.
+                        </p>
+                        <p style="color: rgba(255, 255, 255, 0.75); line-height: 1.6; font-size: 0.88rem; margin: 0;">
+                            ⛺ Dec 27–30, 2026 · COG Campus, Badlapur — <em>"Amidst the noise, tune into His voice."</em> (John 10:27)
+                        </p>
+                    </div>
+                `;
+            } else {
+                container.innerHTML = `
+                    <div class="check-circle" style="background: rgba(200, 225, 0, 0.12); border: 2px solid var(--lime); color: var(--lime); font-size: 2rem; width: 72px; height: 72px; display: inline-flex; align-items: center; justify-content: center; border-radius: 50%; margin-bottom: 1.25rem;">✨</div>
+                    <h3 style="color: #ffffff; margin-bottom: 0.35rem; font-size: 1.75rem;">You're Added to the Waitlist!</h3>
+                    <p style="color: var(--lime); font-size: 1.05rem; font-weight: 700; margin-bottom: 1.5rem; letter-spacing: 0.02em;">Details Saved · Camp Ekklesia 2026 (13th Edition)</p>
+
+                    ${mandatoryNoticeHtml}
+
+                    <div style="background: rgba(200, 225, 0, 0.06); border: 1px solid rgba(200, 225, 0, 0.25); border-radius: 14px; padding: 1.35rem 1.25rem; text-align: left;">
+                        <p style="color: rgba(255, 255, 255, 0.95); line-height: 1.65; margin-bottom: 0.85rem; font-size: 0.98rem;">
+                            👋 <strong>Thank you for signing up!</strong> Your registration details are safely registered on our waitlist.
+                        </p>
+                        <p style="color: rgba(255, 255, 255, 0.88); line-height: 1.65; margin-bottom: 0.85rem; font-size: 0.95rem;">
+                            📲 Someone from our organising team will connect with you on WhatsApp to assist you with completing the payment whenever you're ready and lock in your seat!
+                        </p>
+                        <p style="color: rgba(255, 255, 255, 0.7); line-height: 1.6; font-size: 0.88rem; margin: 0;">
+                            ⛺ Dec 27–30, 2026 · COG Campus, Badlapur — We can't wait to see what God has in store for you!
+                        </p>
+                    </div>
+                `;
+            }
+        }
+
+        // ══ RESILIENT LOCAL STORAGE QUEUE & AUTO-RETRY ENGINE ══
+        function getSyncQueue() {
+            try {
+                const stored = localStorage.getItem(SYNC_QUEUE_KEY);
+                return stored ? JSON.parse(stored) : [];
+            } catch (e) {
+                console.warn('Unable to access localStorage queue:', e);
+                return [];
+            }
+        }
+
+        function saveSyncQueue(queue) {
+            try {
+                localStorage.setItem(SYNC_QUEUE_KEY, JSON.stringify(queue));
+            } catch (e) {
+                console.warn('Unable to save to localStorage:', e);
+            }
+        }
+        function addToSyncQueue(itemType, payload) {
+            const queue = getSyncQueue();
+            const item = {
+                id: 'sync_' + Date.now() + '_' + Math.random().toString(36).substring(2, 7),
+                type: itemType,
+                payload: payload,
+                attempts: 0,
+                createdAt: new Date().toISOString()
+            };
+            queue.push(item);
+            saveSyncQueue(queue);
+            processSyncQueue();
+        }
+
+
+        function queuePendingRegistration() {
+            if (latestRegistrationData) {
+                addToSyncQueue('registration', latestRegistrationData);
+                latestRegistrationData = null;
+            }
+        }
+
+        let isSubmittingPayment = false;
+
+        // Modified uploadPaymentScreenshot to ensure registration is queued first
+        async function uploadPaymentScreenshot() {
+            if (isSubmittingPayment) return;
+
+            if (latestTotalAmount > MAX_UPI_LIMIT) {
+                alert(`The total amount (₹${latestTotalAmount.toLocaleString('en-IN')}) exceeds the UPI limit of ₹1,00,000. Please reduce the number of sponsored campers or voluntary contribution before proceeding.`);
+                return;
+            }
+
+            const fileInput = document.getElementById('screenshotFile');
+            const file = fileInput.files[0];
+
+            if (!file) {
+                alert('Please select your payment confirmation screenshot before submitting, or tap "Pay Later & Join Waitlist".');
+                return;
+            }
+
+            isSubmittingPayment = true;
+
+            const safePhone = latestRegistrationPhone || document.getElementById('whatsapp')?.value?.trim() || 'attendee';
+            const fileName = formatScreenshotFileName(latestRegistrationName, safePhone);
+            
+            // Change button to loading state
+            const uploadSection = document.getElementById('uploadSection');
+            const submitBtn = uploadSection ? uploadSection.querySelector('button') : null;
+            let originalBtnText = '';
+            if (submitBtn) {
+                originalBtnText = submitBtn.innerHTML;
+                submitBtn.innerHTML = '⏳ Uploading... Please wait. Do not close or refresh this page';
+                submitBtn.style.opacity = '0.7';
+                submitBtn.style.cursor = 'not-allowed';
+            }
+
+            try {
+                // Generate a unique Ticket ID for idempotency
+                const ticketId = 'REG_' + Date.now() + '_' + Math.random().toString(36).substring(2, 7);
+
+                // Compress & queue screenshot with ALL registration data in ONE package
+                const { base64Data, mimeType } = await compressImageFile(file);
+                const fullPayload = {
+                    ...latestRegistrationData,
+                    action: 'registration_package',
+                    TicketID: ticketId,
+                    totalAmount: latestTotalAmount,
+                    sponsoredCampers: latestSponsorCount,
+                    voluntaryContribution: latestDonationAmount,
+                    fileData: base64Data,
+                    fileName: fileName,
+                    mimeType: mimeType
+                };
+
+                addToSyncQueue('registration_package', fullPayload);
+                latestRegistrationData = null;
+                if (fileInput) fileInput.value = '';
+
+                // INSTANT VIEW TRANSITION (0ms Delay) -> Jump to Thank You Screen
+                renderThankYouScreen('confirmed');
+                document.getElementById('formSection').style.display = 'none';
+                document.getElementById('paymentSection').style.display = 'none';
+                document.getElementById('thankYouSection').style.display = 'block';
+
+                const formCard = document.querySelector('.prayer-form-wrap');
+                if (formCard) formCard.scrollIntoView({ behavior: 'smooth', block: 'start' });
+
+                
+
+            } catch (error) {
+                console.error('Submission error:', error);
+                alert('An error occurred while preparing your upload. Please try again.');
+            } finally {
+                if (submitBtn) {
+                    submitBtn.innerHTML = originalBtnText;
+                    submitBtn.style.opacity = '1';
+                    submitBtn.style.cursor = 'pointer';
+                }
+                isSubmittingPayment = false;
+            }
+        }
+
+        // Modified handlePayLater to ensure registration is queued before pay‑later entry
+        async function handlePayLater() {
+            const safePhone = latestRegistrationPhone || document.getElementById('whatsapp')?.value?.trim() || 'attendee';
+
+            // Change button to loading state
+            const mainBtn = document.querySelector('.submit-btn');
+            if (mainBtn) { mainBtn.innerHTML = 'Saving... Please wait'; mainBtn.style.opacity = '0.7'; }
+            const payLaterSection = document.getElementById('payLaterSection');
+            const btn = payLaterSection ? payLaterSection.querySelector('button') : null;
+            let originalBtnText = '';
+            if (btn) {
+                originalBtnText = btn.innerHTML;
+                btn.innerHTML = '⏳ Saving... Please wait. Do not close or refresh this page';
+                btn.style.opacity = '0.7';
+                btn.style.cursor = 'not-allowed';
+            }
+
+            try {
+                const ticketId = 'REG_' + Date.now() + '_' + Math.random().toString(36).substring(2, 7);
+                
+                const fullPayload = {
+                    ...latestRegistrationData,
+                    action: 'registration_package',
+                    TicketID: ticketId,
+                    totalAmount: latestTotalAmount,
+                    sponsoredCampers: latestSponsorCount,
+                    voluntaryContribution: latestDonationAmount,
+                    PaymentProof: 'Pending',
+                    PaymentStatus: 'No payment'
+                };
+
+                addToSyncQueue('registration_package', fullPayload);
+                latestRegistrationData = null;
+
+                // INSTANT VIEW TRANSITION (0ms Delay) -> Jump to Thank You (Waitlist Mode)
+                renderThankYouScreen('waitlist');
+                document.getElementById('formSection').style.display = 'none';
+                document.getElementById('paymentSection').style.display = 'none';
+                document.getElementById('thankYouSection').style.display = 'block';
+
+                const formCard = document.querySelector('.prayer-form-wrap');
+                if (formCard) formCard.scrollIntoView({ behavior: 'smooth', block: 'start' });
+
+                
+
+            } catch (error) {
+                console.error('Pay Later error:', error);
+                alert('An error occurred while saving your spot. Please try again.');
+            } finally {
+                document.body.style.cursor = 'default';
+                const mainBtn = document.querySelector('.submit-btn');
+                if (mainBtn) { mainBtn.innerHTML = 'Submit Registration'; mainBtn.style.opacity = '1'; }
+                if (btn) {
+                    btn.innerHTML = originalBtnText;
+                    btn.style.opacity = '1';
+                    btn.style.cursor = 'pointer';
+                }
+            }
+        }
+
+        async function processSyncQueue() {
+            if (isSyncing || GOOGLE_SCRIPT_URL === 'YOUR_GOOGLE_SCRIPT_URL') return;
+            let queue = getSyncQueue();
+            if (!queue || queue.length === 0) return;
+
+            isSyncing = true;
+            let pendingItems = [...queue];
+
+            for (let i = 0; i < pendingItems.length; i++) {
+                const item = pendingItems[i];
+                try {
+                    const formData = new URLSearchParams();
+                    Object.keys(item.payload).forEach(key => {
+                        formData.append(key, item.payload[key]);
+                    });
+
+                    await fetch(GOOGLE_SCRIPT_URL, {
+                        method: 'POST',
+                        mode: 'no-cors',
+                        headers: {
+                            'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'
+                        },
+                        body: formData.toString()
+                    });
+
+                    let currentQueue = getSyncQueue();
+                    currentQueue = currentQueue.filter(q => q.id !== item.id);
+                    saveSyncQueue(currentQueue);
+                } catch (err) {
+                    console.warn(`Background sync attempt failed for ${item.type} (attempt ${item.attempts + 1}):`, err);
+                    
+                    let currentQueue = getSyncQueue();
+                    const target = currentQueue.find(q => q.id === item.id);
+                    if (target) {
+                        target.attempts = (target.attempts || 0) + 1;
+                        saveSyncQueue(currentQueue);
+                    }
+
+                    const nextRetryDelay = Math.min(2000 * Math.pow(1.5, item.attempts || 0), 15000);
+                    setTimeout(() => {
+                        processSyncQueue();
+                    }, nextRetryDelay);
+                    break;
+                }
+            }
+
+            isSyncing = false;
+            
+            // Re-trigger if new items (like the screenshot) were added to the queue while the first request was syncing
+            if (getSyncQueue().length > 0) {
+                setTimeout(processSyncQueue, 500);
+            }
+        }
+
+        // ══ STEP 1: FORM SUBMISSION ══
+        function handleRegistrationSubmit(e) {
+            e.preventDefault();
+
+            // Honeypot bot check
+            const hpField = document.getElementById('website_hp');
+            if (hpField && hpField.value.trim() !== '') {
+                console.warn('Bot submission rejected.');
+                return;
+            }
+
+            const declCheckbox = document.getElementById('voluntaryDeclarationCheckbox');
+            if (!declCheckbox || !declCheckbox.checked) {
+                alert('Please tick the voluntary attendance declaration to proceed.');
+                declCheckbox.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                return;
+            }
+
+            const nameInput = document.getElementById('fullName').value.trim();
+            const phoneInput = document.getElementById('whatsapp').value.trim();
+            latestRegistrationName = nameInput;
+            latestRegistrationPhone = phoneInput;
+
+            // Collect form data with Emergency Contact & Health Concerns (Requirement 2)
+            const registrationData = {
+                action: 'registration',
+                Timestamp: getFormattedTimestamp(),
+                Name: nameInput,
+                Gender: document.getElementById('gender').value,
+                AgeGroup: document.getElementById('ageGroup').value,
+                WhatsApp: phoneInput,
+                Email: document.getElementById('email').value.trim(),
+                Zone: document.getElementById('zone').value,
+                History: document.getElementById('firstCamp').value,
+                Diet: document.getElementById('manna').value,
+                TshirtSize: document.getElementById('tshirt').value,
+                TravelMode: document.getElementById('travel').value,
+                EmergencyContactPerson: document.getElementById('emergencyName').value.trim(),
+                EmergencyContactNumber: document.getElementById('emergencyPhone').value.trim(),
+                HealthConcerns: document.getElementById('healthConcerns').value.trim() || 'None',
+                PaymentProof: 'Pending'
+            };
+
+            // 1. INSTANT SUBMIT (Bypass Payment Section)
+            latestRegistrationData = registrationData;
+            
+            // Show a temporary loading state on the main form
+            document.body.style.cursor = 'wait';
+            
+            // Submit as Pay Later immediately
+            handlePayLater();
+        }
+
+        // Fast Client-Side Image Compression (~20ms compression, reduced to ~60KB)
+        function compressImageFile(file, maxDimension = 900, quality = 0.7) {
+            return new Promise((resolve, reject) => {
+                const reader = new FileReader();
+                reader.readAsDataURL(file);
+                reader.onload = function(event) {
+                    const img = new Image();
+                    img.src = event.target.result;
+                    img.onload = function() {
+                        let width = img.width;
+                        let height = img.height;
+
+                        if (width > height) {
+                            if (width > maxDimension) {
+                                height = Math.round((height * maxDimension) / width);
+                                width = maxDimension;
+                            }
+                        } else {
+                            if (height > maxDimension) {
+                                width = Math.round((width * maxDimension) / height);
+                                height = maxDimension;
+                            }
+                        }
+
+                        const canvas = document.createElement('canvas');
+                        canvas.width = width;
+                        canvas.height = height;
+                        const ctx = canvas.getContext('2d');
+                        ctx.drawImage(img, 0, 0, width, height);
+
+                        const dataUrl = canvas.toDataURL('image/jpeg', quality);
+                        const base64Data = dataUrl.split(',')[1];
+                        resolve({ base64Data, mimeType: 'image/jpeg' });
+                    };
+                    img.onerror = (err) => reject(err);
+                };
+                reader.onerror = (err) => reject(err);
+            });
+        }
+
+        function resetRegistrationForm() {
+            document.getElementById('formSection').style.display = 'block';
+            document.getElementById('paymentSection').style.display = 'none';
+            document.getElementById('thankYouSection').style.display = 'none';
+            const fileInput = document.getElementById('screenshotFile');
+            if (fileInput) fileInput.value = '';
+            document.getElementById('ekklesiaForm').reset();
+            latestSponsorCount = 0;
+            const sponsorCountDisplay = document.getElementById('sponsorCountDisplay');
+            if (sponsorCountDisplay) sponsorCountDisplay.innerText = '0';
+            const donationEl = document.getElementById('customDonationAmount');
+            if (donationEl) donationEl.value = '';
+            const declCheckbox = document.getElementById('voluntaryDeclarationCheckbox');
+            if (declCheckbox) declCheckbox.checked = false;
+            latestRegistrationName = '';
+            latestRegistrationPhone = '';
+            calculateRegistrationTotal();
+            toggleDeclarationStatus();
+            goToStep1();
+        }
+
+        function applyRegularFeeMode() {
+            BASE_REG_FEE = 1200;
+            const bannerEl = document.getElementById('earlyBirdBanner');
+            if (bannerEl) bannerEl.style.display = 'none';
+
+            const feeRowEl = document.getElementById('feeDisplayRow');
+            if (feeRowEl) {
+                feeRowEl.innerHTML = `<strong>Fee:</strong> <strong style="color: var(--lime); font-size: 1.25rem;">₹1200</strong> <span style="font-size: 0.88rem; color: rgba(255,255,255,0.85);">(3 days of food + stay included!)</span>`;
+            }
+
+            const feeNoteEl = document.getElementById('feeNoteBox');
+            if (feeNoteEl) {
+                feeNoteEl.innerHTML = `📌 <strong>Fee:</strong> ₹1200 (3 days of food + stay included!)`;
+            }
+
+            const lockNoticeEl = document.getElementById('lockNoticeBox');
+            if (lockNoticeEl) {
+                const p = lockNoticeEl.querySelector('p');
+                if (p) {
+                    p.innerHTML = `<strong>Fee: ₹1200</strong> covers food and stay. Once submitted, you'll be shown the payment details and options to confirm your seat.`;
+                }
+            }
+            calculateRegistrationTotal();
+        }
+
+        function applyEarlyBirdFeeMode(paidCount) {
+            BASE_REG_FEE = 1150;
+            const bannerEl = document.getElementById('earlyBirdBanner');
+            if (bannerEl) {
+                bannerEl.style.display = 'flex';
+                bannerEl.style.background = 'rgba(255, 215, 0, 0.08)';
+                bannerEl.style.borderColor = 'rgba(255, 215, 0, 0.3)';
+                bannerEl.innerHTML = `
+                    <span style="color: #ffd700; font-weight: 800; font-size: 0.92rem; text-transform: uppercase;">⚡ Early Bird Offer</span>
+                    
+                `;
+            }
+
+            const feeRowEl = document.getElementById('feeDisplayRow');
+            if (feeRowEl) {
+                feeRowEl.innerHTML = `<strong>Fee:</strong> <span style="text-decoration: line-through; color: rgba(255,255,255,0.45); margin-right: 0.35rem;">₹1200</span> <strong style="color: var(--lime); font-size: 1.25rem;">₹1150</strong> <span style="font-size: 0.88rem; color: rgba(255,255,255,0.85);">(3 days of food + stay included!)</span>`;
+            }
+
+            const feeNoteEl = document.getElementById('feeNoteBox');
+            if (feeNoteEl) {
+                feeNoteEl.innerHTML = `📌 <strong>Fee: ₹1200</strong> (3 days of food + stay included!)<br>⚡ <strong>Early Bird:</strong> ₹1150 for the first 50 paid registrations`;
+            }
+
+            const lockNoticeEl = document.getElementById('lockNoticeBox');
+            if (lockNoticeEl) {
+                const p = lockNoticeEl.querySelector('p');
+                if (p) {
+                    p.innerHTML = `<strong>Fee: ₹1150</strong> covers food and stay. Once submitted, you'll be shown the payment details and options to confirm your seat.`;
+                }
+            }
+            calculateRegistrationTotal();
+        }
+
+        async function checkEarlyBirdStatus() {
+            if (!GOOGLE_SCRIPT_URL || GOOGLE_SCRIPT_URL.includes('YOUR_GOOGLE_SCRIPT_URL')) return;
+            try {
+                const response = await fetch(GOOGLE_SCRIPT_URL + '?action=check_earlybird');
+                const data = await response.json();
+                if (data && typeof data.paidCount === 'number') {
+                    const paidCount = data.paidCount;
+                    try { localStorage.setItem('ekklesia_earlybird_count', paidCount); } catch (e) {}
+                    if (paidCount >= 50) {
+                        try { localStorage.setItem('ekklesia_earlybird_active', 'false'); } catch (e) {}
+                        applyRegularFeeMode();
+                    } else {
+                        try { localStorage.setItem('ekklesia_earlybird_active', 'true'); } catch (e) {}
+                        applyEarlyBirdFeeMode(paidCount);
+                    }
+                }
+            } catch (err) {
+                console.warn('Early Bird status check error:', err);
+            }
+        }
+
+        // Auto-run animations & flush any pending queue items on connect/page load
+        window.addEventListener('DOMContentLoaded', () => {
+            try {
+                const cachedActive = localStorage.getItem('ekklesia_earlybird_active');
+                const cachedCount = localStorage.getItem('ekklesia_earlybird_count');
+                if (cachedActive === 'false') {
+                    applyRegularFeeMode();
+                } else if (cachedCount !== null) {
+                    const count = parseInt(cachedCount, 10);
+                    if (!isNaN(count)) {
+                        applyEarlyBirdFeeMode(count);
+                    }
+                }
+            } catch (e) {}
+
+            document.querySelectorAll('.reveal').forEach(el => {
+                setTimeout(() => { el.classList.add('visible'); }, 150);
+            });
+            processSyncQueue();
+            checkEarlyBirdStatus();
+        });
+
+        // Auto-flush queue whenever the phone regains internet connection
+        window.addEventListener('online', () => {
+            processSyncQueue();
+        });
+
+        // Auto-flush queue when page comes back into view
+        window.addEventListener('visibilitychange', () => {
+            if (document.visibilityState === 'visible') {
+                processSyncQueue();
+            }
+        });
+    </script>
+</body>
+
+</html>
