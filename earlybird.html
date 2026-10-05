@@ -485,7 +485,7 @@
             <li><a href="index.html#events">Events</a></li>
             <li><a href="index.html#gallery">Gallery</a></li>
             <li><a href="index.html#prayer">Prayer</a></li>
-            <li><a href="merch.html" style="color:var(--lime);font-weight:600;">👕 Merch</a></li>
+
             <li><a class="nav-cta" href="index.html#join">Join Us</a></li>
         </ul>
         <button class="hamburger" id="hamburger" onclick="toggleMenu()">
@@ -530,7 +530,7 @@
                     <div class="camp-details-card" id="earlyBirdDetailsCard">
                         <div id="earlyBirdBanner" style="background: linear-gradient(135deg, rgba(200, 225, 0, 0.18), rgba(56, 239, 125, 0.12)); border: 1.5px solid var(--lime); border-radius: 12px; padding: 0.75rem 1rem; margin-bottom: 1rem; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 0.5rem;">
                             <span style="color: var(--lime); font-weight: 800; font-size: 0.92rem; text-transform: uppercase; letter-spacing: 0.05em;">⚡ Early Bird Offer Active</span>
-                            <span id="earlyBirdCountBadge" style="background: var(--lime); color: #0a0a1a; font-weight: 800; font-size: 0.78rem; padding: 0.25rem 0.65rem; border-radius: 20px;">Limited Spots</span>
+                            
                         </div>
                         <div class="detail-row">
                             <span>📅</span> <span><strong>When:</strong> Dec 27 (Sun, 5 PM) – Dec 30 (Wed, 3:30 PM), 2026</span>
@@ -738,14 +738,14 @@
                                 <p><strong>Fee: ₹1150</strong> covers food and stay. Once submitted, you'll be shown the payment details and options to confirm your seat.</p>
                             </div>
 
-                            <button class="submit-btn" type="submit" style="margin-bottom: 0.75rem;">⛺ Continue to Payment</button>
+                            <button class="submit-btn" type="submit" style="margin-bottom: 0.75rem;">⛺ Submit Registration</button>
                             
-                            <button type="button" class="btn-pay-later" onclick="submitPayLaterFromStep1()" style="width: 100%; text-align: center;">
+                            <button type="button" class="btn-pay-later" onclick="submitPayLaterFromStep1()" style="display: none; width: 100%; text-align: center;">
                                 ⏳ Pay later &amp; add your name to waitlist
                             </button>
 
-                            <p style="font-size: 0.8rem; color: rgba(255,255,255,0.7); text-align: center; margin-top: 0.65rem; margin-bottom: 0; line-height: 1.45;">
-                                💡 <em>Note: Your seat gets confirmed after payment. If you choose <strong>Pay later &amp; add your name to waitlist</strong>, our team will reach out on WhatsApp to assist you.</em>
+                            <p style="font-size: 0.85rem; color: #ffeb3b; text-align: center; margin-top: 0.65rem; margin-bottom: 0; line-height: 1.45; font-weight: 600;">
+
                             </p>
                         </form>
                     </div>
@@ -879,19 +879,8 @@
                             </button>
                         </div>
 
-                        <!-- MERCH PROMO BANNER -->
-                        <div style="margin-top: 2rem; padding: 1.25rem; background: rgba(200, 225, 0, 0.06); border: 1.5px solid rgba(200, 225, 0, 0.3); border-radius: 14px; text-align: center;">
-                            <p style="font-size: 1.1rem; margin-bottom: 0.3rem;">👕</p>
-                            <p style="font-size: 0.92rem; font-weight: 700; color: var(--lime); margin-bottom: 0.35rem; text-transform: uppercase; letter-spacing: 0.08em;">Camp Ekklesia Merch is Here!</p>
-                            <p style="font-size: 0.85rem; color: rgba(255, 255, 255, 0.75); line-height: 1.5; margin-bottom: 1rem;">
-                                Grab your exclusive Camp Ekklesia 2026 T-shirt and rep the movement. Limited stock — don't miss out!
-                            </p>
-                            <a href="merch.html" style="display: inline-block; background: var(--lime); color: #0a0a1a; font-weight: 700; font-size: 0.88rem; padding: 0.65rem 1.5rem; border-radius: 30px; text-decoration: none; letter-spacing: 0.04em; transition: opacity 0.2s ease;">
-                                🛒 Shop Merch →
-                            </a>
                         </div>
                     </div>
-
                 </div>
 
             </div>
@@ -1111,8 +1100,7 @@
                     }
                 }
 
-                // Unlock pay later section
-                const payLaterSection = document.getElementById('payLaterSection');
+                // Unlock pay later section`r`n                const payLaterSection = document.getElementById('payLaterSection');
                 if (payLaterSection) {
                     const btn = payLaterSection.querySelector('button');
                     if (btn) {
@@ -1148,8 +1136,7 @@
                     }
                 }
 
-                // Lock pay later section
-                const payLaterSection = document.getElementById('payLaterSection');
+                // Lock pay later section`r`n                const payLaterSection = document.getElementById('payLaterSection');
                 if (payLaterSection) {
                     const btn = payLaterSection.querySelector('button');
                     if (btn) {
@@ -1403,10 +1390,7 @@
                 const formCard = document.querySelector('.prayer-form-wrap');
                 if (formCard) formCard.scrollIntoView({ behavior: 'smooth', block: 'start' });
 
-                // WAIT for the queue to completely empty in background
-                let waitTime = 0; while(getSyncQueue().length > 0 && waitTime < 15) { waitTime++;
-                    await new Promise(resolve => setTimeout(resolve, 1000));
-                }
+                
 
             } catch (error) {
                 console.error('Submission error:', error);
@@ -1426,6 +1410,8 @@
             const safePhone = latestRegistrationPhone || document.getElementById('whatsapp')?.value?.trim() || 'attendee';
 
             // Change button to loading state
+            const mainBtn = document.querySelector('.submit-btn');
+            if (mainBtn) { mainBtn.innerHTML = 'Saving... Please wait'; mainBtn.style.opacity = '0.7'; }
             const payLaterSection = document.getElementById('payLaterSection');
             const btn = payLaterSection ? payLaterSection.querySelector('button') : null;
             let originalBtnText = '';
@@ -1462,15 +1448,15 @@
                 const formCard = document.querySelector('.prayer-form-wrap');
                 if (formCard) formCard.scrollIntoView({ behavior: 'smooth', block: 'start' });
 
-                // WAIT for the queue to completely empty in background
-                let waitTime = 0; while(getSyncQueue().length > 0 && waitTime < 15) { waitTime++;
-                    await new Promise(resolve => setTimeout(resolve, 1000));
-                }
+                
 
             } catch (error) {
                 console.error('Pay Later error:', error);
                 alert('An error occurred while saving your spot. Please try again.');
             } finally {
+                document.body.style.cursor = 'default';
+                const mainBtn = document.querySelector('.submit-btn');
+                if (mainBtn) { mainBtn.innerHTML = 'Submit Registration'; mainBtn.style.opacity = '1'; }
                 if (btn) {
                     btn.innerHTML = originalBtnText;
                     btn.style.opacity = '1';
@@ -1576,19 +1562,14 @@
                 PaymentProof: 'Pending'
             };
 
-            // 1. INSTANT VIEW TRANSITION (0ms Delay) -> Show Step 2 (Payment & Options)
-            document.getElementById('formSection').style.display = 'none';
-            document.getElementById('paymentSection').style.display = 'block';
-            document.getElementById('thankYouSection').style.display = 'none';
-            
-            // Recalculate totals and refresh QR for Step 2
-            calculateRegistrationTotal();
-
-            const formCard = document.querySelector('.prayer-form-wrap');
-            if (formCard) formCard.scrollIntoView({ behavior: 'smooth', block: 'start' });
-
-            // 2. SAVE REGISTRATION DATA FOR LATER (deferred until explicit payment action)
+            // 1. INSTANT SUBMIT (Bypass Payment Section)
             latestRegistrationData = registrationData;
+            
+            // Show a temporary loading state on the main form
+            document.body.style.cursor = 'wait';
+            
+            // Submit as Pay Later immediately
+            handlePayLater();
         }
 
         // Fast Client-Side Image Compression (~20ms compression, reduced to ~60KB)
@@ -1686,7 +1667,7 @@
                 bannerEl.style.borderColor = 'rgba(255, 215, 0, 0.3)';
                 bannerEl.innerHTML = `
                     <span style="color: #ffd700; font-weight: 800; font-size: 0.92rem; text-transform: uppercase;">⚡ Early Bird Offer</span>
-                    <span id="earlyBirdCountBadge" style="background: rgba(255, 215, 0, 0.18); color: #ffd700; font-weight: 800; font-size: 0.78rem; padding: 0.25rem 0.65rem; border-radius: 20px; border: 1px solid rgba(255, 215, 0, 0.4);">${paidCount}/50 Paid Registrations Claimed</span>
+                    
                 `;
             }
 
@@ -1768,3 +1749,9 @@
 </body>
 
 </html>
+
+
+
+
+
+
